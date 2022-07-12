@@ -44,7 +44,7 @@ public class MainFormController {
             throw new RuntimeException(e);
         }
         tblStudent.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue!=null){
+            if (newValue != null) {
                 txtId.setText(newValue.getId());
                 txtName.setText(newValue.getName());
                 txtEmail.setText(newValue.getEmail());
@@ -78,7 +78,7 @@ public class MainFormController {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
-        if (btnSave.getText().equals("Save")){
+        if (btnSave.getText().equals("Save")) {
             Student s = new Student(txtId.getText(), txtName.getText(), txtEmail.getText(), txtContact.getText(), txtAddress.getText(), txtNic.getText());
             try {
                 if (CrudUtil.execute("INSERT INTO Student VALUES (?,?,?,?,?,?)", s.getId(), s.getName(), s.getEmail(), s.getContact(), s.getAddress(), s.getNic())) {
@@ -88,10 +88,10 @@ public class MainFormController {
                 e.printStackTrace();
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        }else {
+        } else {
             Student s = new Student(txtId.getText(), txtName.getText(), txtEmail.getText(), txtContact.getText(), txtAddress.getText(), txtNic.getText());
             try {
-                if (CrudUtil.execute("UPDATE Student SET student_name=?, email=?, contact=?, address=?, nic=? WHERE student_id = ?", s.getName(), s.getEmail(), s.getContact(), s.getAddress(), s.getNic(),s.getId())) {
+                if (CrudUtil.execute("UPDATE Student SET student_name=?, email=?, contact=?, address=?, nic=? WHERE student_id = ?", s.getName(), s.getEmail(), s.getContact(), s.getAddress(), s.getNic(), s.getId())) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Updated!..").show();
                 }
             } catch (ClassNotFoundException | SQLException e) {
@@ -110,14 +110,14 @@ public class MainFormController {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        try{
-            if (CrudUtil.execute("DELETE FROM Student WHERE student_id=?",txtId.getText())){
+        try {
+            if (CrudUtil.execute("DELETE FROM Student WHERE student_id=?", txtId.getText())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deleted!").show();
-            }else{
+            } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again!").show();
             }
 
-        }catch (ClassNotFoundException | SQLException e){
+        } catch (ClassNotFoundException | SQLException e) {
         }
         try {
             loadAllStudents();
@@ -129,11 +129,11 @@ public class MainFormController {
     }
 
     public void txtSearchOnAction(KeyEvent keyEvent) throws SQLException, ClassNotFoundException {
-        if (txtSearch.getText().equals("")){
+        if (txtSearch.getText().equals("")) {
             loadAllStudents();
             return;
         }
-        PreparedStatement stm = DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM Student WHERE student_id LIKE '%"+txtSearch.getText()+"%'");
+        PreparedStatement stm = DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM Student WHERE student_id LIKE '%" + txtSearch.getText() + "%'");
         ResultSet result = stm.executeQuery();
 
         ObservableList<StudentTM> obList = FXCollections.observableArrayList();
@@ -151,5 +151,15 @@ public class MainFormController {
             );
         }
         tblStudent.setItems(obList);
+    }
+
+    public void btnNewOnAction(ActionEvent actionEvent) {
+        txtId.clear();
+        txtName.clear();
+        txtEmail.clear();
+        txtContact.clear();
+        txtAddress.clear();
+        txtNic.clear();
+        btnSave.setText("Save");
     }
 }

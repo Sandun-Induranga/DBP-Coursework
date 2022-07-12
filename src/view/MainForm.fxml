@@ -27,5 +27,6 @@
       <Button fx:id="btnSave" layoutX="745.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnSaveOnAction" text="Save" />
       <TextField fx:id="txtSearch" layoutX="408.0" layoutY="188.0" onKeyReleased="#txtSearchOnAction" promptText="Search" />
       <Button fx:id="btnSave1" layoutX="820.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" text="Delete" />
+       <Button layoutX="928.0" layoutY="31.0" mnemonicParsing="false" onAction="#btnNewOnAction" text="New" />
    </children>
 </AnchorPane>
