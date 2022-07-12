@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="510.0" prefWidth="1023.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+   <children>
+      <TableView fx:id="tblStudent" layoutX="82.0" layoutY="236.0" prefHeight="200.0" prefWidth="860.0">
+        <columns>
+          <TableColumn prefWidth="154.0" text="Student Id" />
+          <TableColumn prefWidth="140.0" text="Name" />
+            <TableColumn prefWidth="140.0" text="Email" />
+            <TableColumn prefWidth="140.0" text="Contact" />
+            <TableColumn prefWidth="140.0" text="Addreess" />
+            <TableColumn prefWidth="140.0" text="NIC" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtId" layoutX="82.0" layoutY="57.0" promptText="Student Id" />
+      <TextField fx:id="txtName" layoutX="293.0" layoutY="57.0" promptText="Name" />
+      <TextField fx:id="txtEmail" layoutX="493.0" layoutY="57.0" promptText="Email" />
+      <TextField fx:id="txtContact" layoutX="699.0" layoutY="57.0" promptText="Contact" />
+      <TextField fx:id="txtAddress" layoutX="168.0" layoutY="138.0" promptText="Address" />
+      <TextField fx:id="txtNic" layoutX="408.0" layoutY="138.0" promptText="NIC" />
+      <Button fx:id="btnSave" layoutX="745.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnSaveOnAction" text="Save" />
+      <TextField fx:id="txtSearch" layoutX="408.0" layoutY="188.0" onKeyReleased="#txtSearchOnAction" promptText="Search" />
+      <Button fx:id="btnSave1" layoutX="820.0" layoutY="138.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" text="Delete" />
+   </children>
+</AnchorPane>
