@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import model.Student;
 import util.CrudUtil;
 import view.tm.StudentTM;
@@ -26,6 +27,7 @@ public class MainFormController {
     public TextField txtAddress;
     public TextField txtNic;
     public Button btnSave;
+    public TextField txtSearch;
 
     public void initialize() {
         tblStudent.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -124,5 +126,30 @@ public class MainFormController {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void txtSearchOnAction(KeyEvent keyEvent) throws SQLException, ClassNotFoundException {
+        if (txtSearch.getText().equals("")){
+            loadAllStudents();
+            return;
+        }
+        PreparedStatement stm = DBConnection.getInstance().getConnection().prepareStatement("SELECT * FROM Student WHERE student_id LIKE '%"+txtSearch.getText()+"%'");
+        ResultSet result = stm.executeQuery();
+
+        ObservableList<StudentTM> obList = FXCollections.observableArrayList();
+
+        while (result.next()) {
+            obList.add(
+                    new StudentTM(
+                            result.getString(1),
+                            result.getString(2),
+                            result.getString(3),
+                            result.getString(4),
+                            result.getString(5),
+                            result.getString(6)
+                    )
+            );
+        }
+        tblStudent.setItems(obList);
     }
 }
